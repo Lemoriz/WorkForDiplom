@@ -16,6 +16,7 @@ namespace DiplomApi.Models
         public string ShortDiscription { get; set; }
         public DateTime CreationDate { get; set; }
         public string Path { get; set; }
+        public string Hash { get; set; }
         public float Size { get; set; }
         public int DocumentTypeId { get; set; }
 

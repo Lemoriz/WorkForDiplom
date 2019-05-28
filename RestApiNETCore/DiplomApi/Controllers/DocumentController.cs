@@ -28,7 +28,7 @@
 
         [HttpGet]
         [EnableCors("MyPolicy")]
-        public async Task<IEnumerable<Document>> GetAll (int id)
+        public async Task<IEnumerable<Document>> GetAll ()
         {
             return await _documentRepo.GetAll();
         }

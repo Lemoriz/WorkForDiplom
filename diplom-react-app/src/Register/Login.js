@@ -21,10 +21,11 @@ class Login extends Component {
 	}
 	//В первый аргумент функции прилетает что-то непонятное.
 	enterClick(a, emailLogin = this.state.inputFormValues.emailLogin, passwordLogin = this.state.inputFormValues.passwordLogin) {
-
+	//	this.props.updateData({ logIn: true });
 		GetUserAuthorizRequest(emailLogin, passwordLogin)
 			.then(result => {
 				if(!result){
+					// eslint-disable-next-line no-undef
 					alert('Неверный логин или пароль');
 				}else{
 					this.props.updateData({ logIn: true, userInfo: result });
