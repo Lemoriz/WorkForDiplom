@@ -16,7 +16,7 @@ class MenuItem extends Component {
 	menuItemClick() {
 		if(this.state.isToggleOn){
 			if(this.props.clickID === 'addDocument'){
-				this.props.updateData(<AddDocument/>);
+				this.props.updateData(<AddDocument userInfo={ this.props.userInfo }/>);
 			}
 			if(this.props.clickID === 'deleteDocument'){
 				this.props.updateData(<h1>Удалить документ</h1>);
@@ -54,7 +54,12 @@ class MenuItem extends Component {
 MenuItem.propTypes = {
 	clickID: PropTypes.string,
 	name: PropTypes.string,
-	updateData : PropTypes.func
+	updateData : PropTypes.func,
+	userInfo: PropTypes.object,
+};
+
+MenuItem.defaultProps = {
+	userInfo: {}
 };
 
 export default MenuItem;

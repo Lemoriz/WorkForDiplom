@@ -38,7 +38,7 @@
         {
             using (IDbConnection conn = Connection)
             {
-                string employeeStringQuery = "SELECT Name, Surname, MiddleName, TelephoneNumber, Password, Email, PositionID FROM Employee WHERE Email = @Email";
+                string employeeStringQuery = "SELECT EmployeeId, Name, Surname, MiddleName, TelephoneNumber, Password, Email, PositionID FROM Employee WHERE Email = @Email";
                 IEnumerable<Employee> employeeResult = await conn.QueryAsync<Employee>(employeeStringQuery, new { Email = email });
                 try
                 {
@@ -52,6 +52,7 @@
 
                         return new AuthorizInfo
                         {
+                            EmployeeId = employeeResult.FirstOrDefault().EmployeeId,
                             Name = employeeResult.FirstOrDefault().Name,
                             Surname = employeeResult.FirstOrDefault().Surname,
                             MiddleName = employeeResult.FirstOrDefault().MiddleName,

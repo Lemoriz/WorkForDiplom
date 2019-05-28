@@ -66,7 +66,7 @@ class Header extends Component {
 				{
 					this.state.open 
 						? <div className="list-group">
-							<MenuItem name = 'Добавить документ' clickID = 'addDocument' updateData={ this.updateData }/>
+							<MenuItem name = 'Добавить документ' clickID = 'addDocument' updateData={ this.updateData } userInfo={ this.state.userInfo }/>
 							<MenuItem name = 'Редактировать документ' clickID = 'editDocument' updateData={ this.updateData }/>
 							<MenuItem name = 'Просмотреть список документов' clickID = 'showListDocument' updateData={ this.updateData }/>
 							<MenuItem name = 'Отправить документ на согласование' clickID = 'showListDocument' updateData={ this.updateData }/>

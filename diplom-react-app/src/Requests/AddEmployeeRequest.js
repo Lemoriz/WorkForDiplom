@@ -1,4 +1,5 @@
 const AddEmployeeRequest = async (e) => {
+	// eslint-disable-next-line no-undef
 	return await fetch('https://localhost:5001/api/Employee', {
 		method: 'POST',
 		headers: {

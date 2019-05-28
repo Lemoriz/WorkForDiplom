@@ -79,6 +79,7 @@ class Registration extends Component {
 		this.setState({ validInputForms: inputFormsObj, allFormsValid: validFlag })
 	}
 
+	/* eslint-disable no-undef */
 	regClick() {
 		if(this.state.allFormsValid){ 
 			AddEmployeeRequest(this.state.inputFormValues).then(result => {

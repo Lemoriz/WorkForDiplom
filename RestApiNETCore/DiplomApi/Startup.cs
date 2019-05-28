@@ -36,6 +36,8 @@
             services.AddTransient<Repo.Subdivision.ISubdivisionRepository, Repo.Subdivision.SubdivisionRepository>();
             //Сервис для авторизации
             services.AddTransient<Repo.AuthorizInfo.IAuthorizInfoRepository, Repo.AuthorizInfo.AuthorizInfoRepository>();
+            //Сервис для загрузки документа
+            services.AddTransient<Repo.UploadFile.IUploadFileRepository, Repo.UploadFile.UploadFileRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
