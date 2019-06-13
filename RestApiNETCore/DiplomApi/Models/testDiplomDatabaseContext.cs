@@ -33,7 +33,7 @@ namespace DiplomApi.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(MetaInfo._cleanConnectionString);
+                optionsBuilder.UseSqlServer(MetaInfo._connectionString);
             }
         }
 

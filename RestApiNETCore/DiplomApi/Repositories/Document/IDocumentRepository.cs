@@ -9,7 +9,7 @@
     /// </summary>
     public interface IDocumentRepository
     {
-        Task<Document> GetByID(int id);
+        Task<IEnumerable<Document>> GetByID(string id);
         Task<IEnumerable<Document>> GetAll();
         Task AddDocument(Document document);
     }

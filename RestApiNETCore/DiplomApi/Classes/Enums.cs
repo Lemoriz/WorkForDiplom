@@ -7,7 +7,8 @@
             SendForApproval = 1,
             Approved = 2,
             Rejected = 3,
-            AddFileInDB = 4
+            AddFileInDB = 4,
+            EditDocument = 5
         }
 
         public enum ActionsStaus

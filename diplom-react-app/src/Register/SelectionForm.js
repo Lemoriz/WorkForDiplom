@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import GetPositions from '../Requests/GetPositions'
+import GetPositionsRequest from '../Requests/GetPositionsRequest'
 import GetSubdivisionsRequest from '../Requests/GetSubdivisionsRequest'
 
 class SelectionForm extends Component {
@@ -18,7 +18,7 @@ class SelectionForm extends Component {
 		let firstElementFlag = true;
 
 		if(id === 'positionRegistration'){
-			GetPositions(this).then(items => {
+			GetPositionsRequest(this).then(items => {
 				this.setState({
 					validForm: true,
 					items: items.map(item => {

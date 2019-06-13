@@ -53,14 +53,14 @@
             }
 
             AddDocumentInDatabase(new Document
-            {
-                Name = model.Name,
-                ShortDiscription = model.ShortDescription,
-                Path = originalFilePath,
-                Size = float.Parse($"{fileSizeInKB}", System.Globalization.CultureInfo.InvariantCulture),
-                Hash = model.EncryptHash,
-                DocumentTypeId = documentType.DocumentTypeId
-            });
+                {
+                    Name = model.Name,
+                    ShortDiscription = model.ShortDescription,
+                    Path = originalFilePath,
+                    Size = float.Parse($"{fileSizeInKB}", System.Globalization.CultureInfo.InvariantCulture),
+                    Hash = model.EncryptHash,
+                    DocumentTypeId = documentType.DocumentTypeId
+                });
 
             CheckActionHistory("Добавлен документ", GetDocumentIdByFilePath(originalFilePath), model.EmployeeID, Enums.Action.AddFileInDB);
 
