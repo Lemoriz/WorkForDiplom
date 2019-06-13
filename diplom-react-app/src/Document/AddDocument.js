@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css'
 import PropTypes from 'prop-types';
 import AddFileRequest from '../Requests/AddFileRequest';
 
@@ -43,13 +44,12 @@ class AddDocument extends React.Component {
 
 	render() {
 		return (
-			<div className="container">
-				<div className="row">
-					<input type="text" className="form-control" name="name" placeholder="Название документа" onChange = { this.handleChange  }/>              
-					<input type="text" className="form-control" name="shortDiscription" placeholder="Краткое описание документа" onChange = { this.handleChange  }/>
-					<input className="file" type="file" onChange={ this.fileChanged } accept=".txt,.docx,.pdf,.xls" />
-					<button className="submitButton" type="submit" onClick={ this.handleSubmit }>Upload Image</button>
-				</div>
+			<div className = 'addDoc'>
+				<input type="text" className="form-control" name="name" placeholder="Название документа" onChange = { this.handleChange  }/>              
+				<input type="text" className="form-control" name="shortDiscription" placeholder="Краткое описание документа" onChange = { this.handleChange  }/>
+
+				<input className="file" name="qwewqe" type="file" onChange={ this.fileChanged } accept=".txt,.docx,.pdf,.xls" />
+				<button className="submitButton" type="submit" onClick={ this.handleSubmit }>Загрузить документ</button>
 			</div>
 		)
 	}

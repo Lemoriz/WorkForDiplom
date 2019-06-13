@@ -1,6 +1,8 @@
+import serverName from '../serverName';
+
 const AddEmployeeRequest = async (e) => {
 	// eslint-disable-next-line no-undef
-	return await fetch('https://localhost:5001/api/Employee', {
+	return await fetch(`${ serverName }/api/Employee`, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',

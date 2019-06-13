@@ -1,6 +1,8 @@
+import serverName from '../serverName';
+
 const GetSubdivisionsRequest = async () =>
 	// eslint-disable-next-line no-undef
-	await fetch('https://localhost:5001/api/Subdivision')
+	await fetch(`${ serverName }/api/Subdivision`)
 		.then(res => res.json());
 		
 export default GetSubdivisionsRequest;

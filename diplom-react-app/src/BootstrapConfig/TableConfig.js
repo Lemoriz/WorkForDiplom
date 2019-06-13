@@ -1,8 +1,44 @@
-function onAfterDeleteRow(rowKeys) {
-	// alert('The rowkey you drop: ' + rowKeys);
+import React from 'react';
+import { InsertButton, DeleteButton } from 'react-bootstrap-table-plus';
+
+const handleInsertButtonClick = (onClick) => {
+	// Custom your onClick event here,
+	// it's not necessary to implement this function if you have no any process before onClick
+	console.log(onClick);
 }
 
-function onAfterInsertRow(row) {
+const handleDeleteButtonClick = (onClick) => {
+	// Custom your onClick event here,
+	// it's not necessary to implement this function if you have no any process before onClick
+	if(10 > 5){
+		alert('Недостаточно прав!');
+
+		return;
+	}
+	
+	onClick();
+}
+
+const createCustomInsertButton = (onClick) => {
+	debugger;
+	return (
+		<InsertButton
+			btnText='Редактировать'
+			onClick={ () => handleInsertButtonClick(onClick) }/>
+	);
+}
+
+const createCustomDeleteButton = (onClick) => {
+	debugger;
+	return (
+		<DeleteButton
+			btnText='Удалить'
+			onClick={ () => handleDeleteButtonClick(onClick) }/>
+	);
+}
+
+function onSelect(row) {
+	debugger;
 	// let newRowStr = '';
 
 	// for (const prop in row) {
@@ -20,9 +56,15 @@ function afterSearch(searchText, result) {
 }
 
 const Options = {
-	afterDeleteRow: onAfterDeleteRow,
+	insertBtn: createCustomInsertButton,
+	deleteBtn: createCustomDeleteButton,
 	afterSearch: afterSearch,
-	afterInsertRow: onAfterInsertRow
+//	afterInsertRow: onAfterInsertRow,
+	onSelect : onSelect 
+	// exportCSVText: 'my_export',
+	// insertText: 'my_insert',
+	// saveText: 'my_save',
+	// closeText: 'my_close'
 };
 
 export { Options };

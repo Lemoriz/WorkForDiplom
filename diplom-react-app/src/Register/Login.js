@@ -21,7 +21,7 @@ class Login extends Component {
 	}
 	//В первый аргумент функции прилетает что-то непонятное.
 	enterClick(a, emailLogin = this.state.inputFormValues.emailLogin, passwordLogin = this.state.inputFormValues.passwordLogin) {
-	//	this.props.updateData({ logIn: true });
+		//this.props.updateData({ logIn: true });
 		GetUserAuthorizRequest(emailLogin, passwordLogin)
 			.then(result => {
 				if(!result){
@@ -64,7 +64,7 @@ class Login extends Component {
 				{
 					this.state.registrationMode 
 						? < Registration updateData={ this.updateData }/> 
-						: <form className="text-center border border-light p-5">
+						: <form className="text-center border-light p-5">
 							<p className="h4 mb-4">Авторизация</p>
 							<input type="email" id="emailLogin" className="form-control mb-4" autoComplete="on" placeholder="E-mail" onChange = { this.inputFormValues }/>
 							<input type="password" id="passwordLogin" className="form-control mb-4" autoComplete="on" placeholder="Пароль" onChange = { this.inputFormValues }/>

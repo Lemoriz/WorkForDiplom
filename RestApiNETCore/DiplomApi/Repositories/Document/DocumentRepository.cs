@@ -34,50 +34,77 @@
         /// </summary>
         /// <param name="documentID">id документа</param>
         /// <returns></returns>
-        public async Task<Document> GetByID(int documentID)
+        public async Task<IEnumerable<Document>> GetByID(string documentID)//wantToApprove   noWantToApprove
         {
-            using (IDbConnection conn = Connection)
-            {
-                string sQuery = "SELECT DocumentID, [Name], [ShortDiscription], [Path], [Status], [Size], [EditsAndChanges], [DocumentTypeID] FROM Document WHERE [DocumentID] = @DocumentID";
-                IEnumerable<Document> result = await conn.QueryAsync<Document>(sQuery, new Document { DocumentId = documentID });
-                return result.FirstOrDefault();
-            }
-        }
+            List<string> documentsSendedForApproval = new List<string>();
 
-        /// <summary>
-        /// Получение всех документов.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<IEnumerable<Document>> GetAll()
-        {
             using (IDbConnection conn = Connection)
             {
-                string sQuery = "SELECT * FROM Document";
+                   
+                string sQuery = "SELECT * FROM ActionHistory";
+                IEnumerable<ActionHistory> result = await conn.QueryAsync<ActionHistory>(sQuery);
+
+                IEnumerable<int> unicDocsID = result.Select(x => x.DocumentId).Distinct();
+
+                foreach (int unicDocID in unicDocsID)
+                {
+                    var res = result.Where(x => x.DocumentId == unicDocID ).OrderByDescending(t => t.Date).FirstOrDefault();
+
+                    if (res != null)
+                    {
+                        if (documentID == "wantToApprove" && res.ActionId == 1)
+                            documentsSendedForApproval.Add($"'{res.DocumentId.ToString()}'");
+
+                        if (documentID == "noWantToApprove" && res.ActionId != 1)
+                            documentsSendedForApproval.Add($"'{res.DocumentId.ToString()}'");
+                    }
+                }
+            }
+
+            using (IDbConnection conn = Connection)
+            {
+                string sQuery = $"SELECT DocumentID, Name, ShortDiscription, CreationDate, Path, Hash, Size, DocumentTypeID FROM Document WHERE DocumentID IN ({string.Join(", ", documentsSendedForApproval)})";
                 IEnumerable<Document> result = await conn.QueryAsync<Document>(sQuery);
                 return result;
+
             }
         }
 
-        /// <summary>
-        /// Добавление документа.
-        /// </summary>
-        /// <param name="document">Документ для добавления</param>
-        /// <returns></returns>
-        public async Task AddDocument(Document document)
+
+    /// <summary>
+    /// Получение всех документов.
+    /// </summary>
+    /// <returns></returns>
+    public async Task<IEnumerable<Document>> GetAll()
+    {
+        using (IDbConnection conn = Connection)
         {
-            using (IDbConnection conn = Connection)
-            {
-                string sQuery = @"INSERT INTO Document(Name, ShortDiscription, Path, Size, DocumentTypeID) VALUES (@Name, @ShortDiscription, @Path, @Size, @DocumentTypeID)";
-                var result = await conn.ExecuteAsync(sQuery, 
-                    new Document
-                    {
-                        Name = document.Name,
-                        ShortDiscription = document.ShortDiscription,
-                        Path = document.Path,
-                        Size = document.Size,
-                        DocumentTypeId = document.DocumentTypeId
-                    });
-            }
+            string sQuery = "SELECT * FROM Document";
+            IEnumerable<Document> result = await conn.QueryAsync<Document>(sQuery);
+            return result;
         }
     }
+
+    /// <summary>
+    /// Добавление документа.
+    /// </summary>
+    /// <param name="document">Документ для добавления</param>
+    /// <returns></returns>
+    public async Task AddDocument(Document document)
+    {
+        using (IDbConnection conn = Connection)
+        {
+            string sQuery = @"INSERT INTO Document(Name, ShortDiscription, Path, Size, DocumentTypeID) VALUES (@Name, @ShortDiscription, @Path, @Size, @DocumentTypeID)";
+            var result = await conn.ExecuteAsync(sQuery,
+                new Document
+                {
+                    Name = document.Name,
+                    ShortDiscription = document.ShortDiscription,
+                    Path = document.Path,
+                    Size = document.Size,
+                    DocumentTypeId = document.DocumentTypeId
+                });
+        }
+    }
+}
 }

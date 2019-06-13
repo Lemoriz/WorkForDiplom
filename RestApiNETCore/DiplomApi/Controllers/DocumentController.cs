@@ -21,7 +21,7 @@
         [HttpGet]
         [Route("{id}")]
         [EnableCors("MyPolicy")]
-        public async Task<Document> GetByID(int id)
+        public async Task<IEnumerable<Document>> GetByID(string id)
         {
             return await _documentRepo.GetByID(id);
         }

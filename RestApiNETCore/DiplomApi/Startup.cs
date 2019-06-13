@@ -38,6 +38,20 @@
             services.AddTransient<Repo.AuthorizInfo.IAuthorizInfoRepository, Repo.AuthorizInfo.AuthorizInfoRepository>();
             //Сервис для загрузки документа
             services.AddTransient<Repo.UploadFile.IUploadFileRepository, Repo.UploadFile.UploadFileRepository>();
+            //Сервис для типов документа
+            services.AddTransient<Repo.DocumentType.IDocumentTypeRepository, Repo.DocumentType.DocumentTypeRepository>();
+            //Сервис для получения файла
+            services.AddTransient<Repo.DownloadFile.IDownloadFileRepository, Repo.DownloadFile.UploadFileRepository>();
+            //Сервис для обновления файла
+            services.AddTransient<Repo.ReplaceUploadedFile.IReplaceUploadedFileRepository, Repo.ReplaceUploadedFile.ReplaceUploadedFileRepository>();
+            //Сервис для добавления записи в историю действий
+            services.AddTransient<Repo.SendDocumentForApproval.ISendDocumentForApprovalRepository, Repo.SendDocumentForApproval.SendDocumentForApprovalRepository>();
+            //Сервис для добавления записи в историю действий
+            services.AddTransient<Repo.ActionHistory.IActionHistoryRepository, Repo.ActionHistory.ActionHistoryRepository>();
+            //Сервис для добавления записи в историю действий
+            services.AddTransient<Repo.ActionStatus.IActionStatusRepository, Repo.ActionStatus.ActionStatusRepository>();
+            //Сервис для добавления записи в историю действий
+            services.AddTransient<Repo.Action.IActionRepository, Repo.Action.ActionRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

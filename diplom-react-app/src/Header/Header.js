@@ -37,45 +37,42 @@ class Header extends Component {
 	
 	render() {
 		return (
-			<div>
-				<div>
-					<header>
-						<nav className="navbar navbar-light bg-light">
-							<div>
-								<h5 className="text-center">Меню</h5>
-								<button 
-									className="navbar-toggler" 
-									type="button" 
-									onClick={ this.toggle.bind(this) } 
-									data-toggle="collapse" 
-									data-target="#navbarText" 
-									aria-controls="navbarText" 
-									aria-expanded="false" 
-									aria-label="Toggle navigation"
-								>
-									<span className="navbar-toggler-icon"></span>
-								</button>
-							</div>
-							<div id="navbarText">
-								<h3 className="text-center">DocFlow</h3>
-							</div>
-							<UserMenu userInfo={ this.state.userInfo } userMenuUpdateData={ this.userMenuUpdateData }/>
-						</nav>
-					</header>
+			<div className="d-flex" id="wrapper">
+				<div className="bg-light border-right" id="sidebar-wrapper">
+					{
+						this.state.open 
+							?<div>      
+								<div className="sidebar-heading">Работа с документом </div> 
+								<div className="list-group list-group-flush">
+									<MenuItem name = 'Добавить документ' clickID = 'addDocument' updateData={ this.updateData } userInfo={ this.state.userInfo }/>
+									<MenuItem name = 'Редактировать документ' clickID = 'editDocument' updateData={ this.updateData } userInfo={ this.state.userInfo }/>
+									<MenuItem name = 'Просмотреть список документов' clickID = 'viewAllDocuments' updateData={ this.updateData }/>
+									<MenuItem name = 'Отправить документ на согласование' clickID = 'sendForApproval' updateData={ this.updateData } userInfo={ this.state.userInfo }/>
+									<MenuItem name = 'Согласовать документ' clickID = 'approval' updateData={ this.updateData } userInfo={ this.state.userInfo }/>
+									<MenuItem name = 'Результаты мониторинга' clickID = 'monitoringResults' updateData={ this.updateData } userInfo={ this.state.userInfo }/>
+								</div>			
+							</div> 			
+							: null
+					}
 				</div>
-				{
-					this.state.open 
-						? <div className="list-group">
-							<MenuItem name = 'Добавить документ' clickID = 'addDocument' updateData={ this.updateData } userInfo={ this.state.userInfo }/>
-							<MenuItem name = 'Редактировать документ' clickID = 'editDocument' updateData={ this.updateData }/>
-							<MenuItem name = 'Просмотреть список документов' clickID = 'showListDocument' updateData={ this.updateData }/>
-							<MenuItem name = 'Отправить документ на согласование' clickID = 'showListDocument' updateData={ this.updateData }/>
-							<MenuItem name = 'Согласовать документ' clickID = 'showListDocument' updateData={ this.updateData }/>
-							<MenuItem name = 'Результаты мониторинга' clickID = 'showListDocument' updateData={ this.updateData }/>
-						</div>
-						: null
-				}
-				{ this.state.menuItemElement }
+				<div id="page-content-wrapper">
+					<nav className="navbar navbar-light bg-light">
+						<button 
+							className="navbar-toggler" 
+							type="button" 
+							onClick={ this.toggle.bind(this) } 
+						>
+							<span className="navbar-toggler-icon"></span>
+						</button>
+						<li className="nav navbar-nav navbar-center" text="align:center">
+							<h3 className="text-center">DocFlow</h3>
+						</li>
+						<UserMenu userInfo={ this.state.userInfo } userMenuUpdateData={ this.userMenuUpdateData }/>
+					</nav>
+					<div className="wr">
+						{ this.state.menuItemElement }
+					</div>
+				</div>
 			</div>
 		);
 	}
